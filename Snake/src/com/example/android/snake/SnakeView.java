@@ -249,6 +249,12 @@ public class SnakeView extends TileView {
     
     
 
+    /*
+     * The original example required a D-Pad present on the device.
+     * Since I have a Samsung Galaxy Mini (GT-S5570) I copied the
+     * behaviour from the onKeyDown() to this onTouchEvent() method.
+     * Therefore, you can control the snake by touching the phone screen. 
+     */
     @Override
 	public boolean onTouchEvent(MotionEvent event) {
         if (mMode == READY | mMode == LOSE) {
@@ -271,6 +277,8 @@ public class SnakeView extends TileView {
             update();
             return (true);
         }
+        
+        // On every touch of the phone screen the snake turns clockwise
         if (mDirection == SOUTH) {
             mNextDirection = WEST;
             return (true);
@@ -290,6 +298,7 @@ public class SnakeView extends TileView {
         }
     	return super.onTouchEvent(event);
 	}
+
 
 	/*
      * handles key events in the game. Update the direction our snake is traveling
