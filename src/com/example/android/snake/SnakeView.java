@@ -463,11 +463,14 @@ public class SnakeView extends TileView {
      * 
      */
     private void updateSnake() {
-        boolean growSnake = false;
+        // TODO boolean growSnake = false;
 
         // grab the snake by the head
         // TODO Coordinate head = mSnakeTrail.get(0);
-        Coordinate newHead = new Coordinate(1, 1);
+        // TODO Coordinate newHead = new Coordinate(1, 1);
+
+        Yard yard = this.game.getYard();
+        Snake snake = yard.getSnake();
 
         /* TODO
         mDirection = mNextDirection;
@@ -494,12 +497,14 @@ public class SnakeView extends TileView {
 
         // Collision detection
         // For now we have a 1-square wall around the entire arena
+        /* TODO
         if ((newHead.x < 1) || (newHead.y < 1) || (newHead.x > mXTileCount - 2)
                 || (newHead.y > mYTileCount - 2)) {
             setMode(LOSE);
             return;
 
         }
+        */
 
         // Look for collisions with itself
         /* TODO
@@ -517,14 +522,18 @@ public class SnakeView extends TileView {
         int applecount = mAppleList.size();
         for (int appleindex = 0; appleindex < applecount; appleindex++) {
             Coordinate c = mAppleList.get(appleindex);
-            if (c.equals(newHead)) {
+            Coordinates head = snake.getHeadCoordinates();
+            if (c.x == head.x && c.y == head.y) {
+            // TODO if (c.equals(newHead)) {
                 mAppleList.remove(c);
                 addRandomApple();
                 
                 mScore++;
                 // TODO mMoveDelay *= 0.9;
 
-                growSnake = true;
+                // TODO growSnake = true;
+                snake.eat();
+                
             }
         }
 
@@ -548,8 +557,7 @@ public class SnakeView extends TileView {
             index++;
         }
         */
-        Yard yard = this.game.getYard();
-        Snake snake = yard.getSnake();
+        
         snake.render(new SnakeRenderer() {
 			
 			@Override
